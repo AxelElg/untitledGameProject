@@ -1,5 +1,7 @@
 import Phaser from 'phaser';
-import scene2 from './Scenes/scene2';
+import titleScene from './Scenes/scene1';
+import loadGame from './Scenes/scene2';
+import playGame from './Scenes/scene3';
 
 export default {
 	type: Phaser.AUTO,
@@ -12,6 +14,6 @@ export default {
 			debug: false,
 		},
 	},
-	scene: scene2,
+	scene: [titleScene, loadGame, playGame],
 	pixelArt: true,
 };

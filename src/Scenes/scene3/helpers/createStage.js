@@ -75,5 +75,4 @@ export default function createStage(platforms) {
 			buildStage3();
 			break;
 	}
-	console.log(rNJ);
 }

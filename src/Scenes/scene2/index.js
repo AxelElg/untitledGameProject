@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 import dude from '../../assets/dude.png';
 import flame from '../../assets/flame.png';
+import flame3 from '../../assets/flame3.png';
 import enemy from '../../assets/enemy.png';
 import ground from '../../assets/ground.png';
 import ground21 from '../../assets/ground2-1.png';
@@ -36,9 +37,9 @@ export default class loadGame extends Phaser.Scene {
 			frameWidth: 20,
 			frameHeight: 20,
 		});
-		this.load.spritesheet('jetFlame', flame, {
-			frameWidth: 8,
-			frameHeight: 25,
+		this.load.spritesheet('jetFlame', flame3, {
+			frameWidth: 6,
+			frameHeight: 16,
 		});
 		this.load.spritesheet('enemy', enemy, {
 			frameWidth: 20,

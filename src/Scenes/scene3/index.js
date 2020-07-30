@@ -28,6 +28,8 @@ export default class playGame extends Phaser.Scene {
 			(config.height / 3) * 2,
 			'enemy'
 		);
+		this.enemy1.body.setAllowGravity(false);
+		this.physics.add.collider(this.player, this.platforms);
 
 		this.anims.create({
 			key: 'right',
@@ -83,23 +85,26 @@ export default class playGame extends Phaser.Scene {
 			repeat: -1,
 		});
 		this.enemy1.anims.play('enemyLeft', true);
-		this.enemy1.body.setAllowGravity(false);
-
-		this.physics.add.collider(this.player, this.platforms);
-		this.physics.add.collider(this.flame, this.enemy1);
 	}
 
 	update() {
 		let cursors = this.input.keyboard.createCursorKeys();
 		const { player, enemy1, flame } = this;
 		flame.body.setAllowGravity(false);
-		flame.x = player.x;
-		flame.y = player.y + 15;
+		flame.x = player.x + (player.faceDir === 'right' ? -2 : 2);
+		flame.setVelocityX(player.body.velocity.x);
+		flame.y = player.y + 9;
+		flame.setVelocityY(player.body.velocity.y);
 		if (!cursors.up.isDown) {
-			flame.visible = false;
+			flame.setVisible(false);
 		} else {
-			flame.visible = true;
+			flame.setVisible(true);
 		}
+		if (this.physics.overlap(flame, enemy1) && flame.visible) {
+			enemy1.setVisible(false);
+		}
+		if (this.physics.overlap(enemy1, player) && enemy1.visible)
+			this.scene.start('titleScene');
 
 		handleInput(player, cursors);
 		enemyHandler(player, enemy1);

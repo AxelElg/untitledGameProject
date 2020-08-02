@@ -38,11 +38,11 @@ export default function handleInput(player, cursors) {
 		player.setVelocityY(player.body.velocity.y - 10);
 	}
 
-	if (player.x < -10) {
-		player.x = 210;
+	if (player.x < -9) {
+		player.x = 209;
 	}
-	if (player.x > 210) {
-		player.x = -10;
+	if (player.x > 209) {
+		player.x = -9;
 	}
 	if (player.y < 0) {
 		player.setVelocityY(200);

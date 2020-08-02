@@ -15,4 +15,6 @@ export default function enemyHandler(player, enemy) {
 		enemy.anims.play('enemyLeft', true);
 		enemy.setVelocityX(enemy.body.velocity.x - acceleration);
 	}
+	if (enemy.x > 209) enemy.x = -9;
+	if (enemy.x < -9) enemy.x = 209;
 }

@@ -41,6 +41,6 @@ export default class loadGame extends Phaser.Scene {
 		});
 	}
 	update() {
-		this.scene.start('playGame');
+		this.scene.start('nextLevel');
 	}
 }

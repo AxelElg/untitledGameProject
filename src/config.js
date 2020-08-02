@@ -1,7 +1,9 @@
 import Phaser from 'phaser';
 import titleScene from './Scenes/scene1';
 import loadGame from './Scenes/scene2';
-import playGame from './Scenes/scene3';
+import nextLevel from './Scenes/scene3';
+import playGame from './Scenes/scene4';
+import gameOver from './Scenes/scene5';
 
 export default {
 	type: Phaser.AUTO,
@@ -14,6 +16,6 @@ export default {
 			debug: false,
 		},
 	},
-	scene: [titleScene, loadGame, playGame],
+	scene: [titleScene, loadGame, nextLevel, playGame, gameOver],
 	pixelArt: true,
 };

@@ -2,6 +2,7 @@ import Phaser from 'phaser';
 import config from '../../config';
 import handleInput from './helpers/player.js';
 import enemyHandler from './helpers/enemyHandeler';
+import initialEnemyAdder from './helpers/enemyMaker';
 import createStage from './helpers/createStage';
 
 let player;
@@ -36,23 +37,25 @@ export default class playGame extends Phaser.Scene {
 		player = this.physics.add.sprite(
 			config.width / 3,
 			config.height - 60,
-			'characterSprites'
+			'dude'
 		);
 		player.faceDir = 'right';
 		enemy = this.add.group();
 
-		for (let i = 0; i < this.level; i++) {
-			enemy.add(
-				this.physics.add.sprite(
-					Math.random() * config.width,
-					enemyStartPos(player.y),
-					'characterSprites'
-				)
-			);
-		}
+		initialEnemyAdder(this.level, player, enemy, this);
+		// for (let i = 0; i < this.level; i++) {
+		// 	let newEnemy = this.physics.add.sprite(
+		// 		i % 2 ? 0 : 200,
+		// 		enemyStartPos(player.y),
+		// 		'chaser'
+		// 	);
+		// 	newEnemy.enemyType = 'chaser';
+		// 	enemy.add(newEnemy);
+		// }
 		enemy.children.each(e => {
 			e.body.setAllowGravity(false);
 			e.body.setBounce(1);
+			e.body.setSize(10, 10, true);
 		});
 
 		this.physics.add.collider(player, platforms);
@@ -60,7 +63,7 @@ export default class playGame extends Phaser.Scene {
 
 		this.anims.create({
 			key: 'right',
-			frames: this.anims.generateFrameNumbers('characterSprites', {
+			frames: this.anims.generateFrameNumbers('dude', {
 				start: 7,
 				end: 10,
 			}),
@@ -69,7 +72,7 @@ export default class playGame extends Phaser.Scene {
 		});
 		this.anims.create({
 			key: 'left',
-			frames: this.anims.generateFrameNumbers('characterSprites', {
+			frames: this.anims.generateFrameNumbers('dude', {
 				start: 1,
 				end: 4,
 			}),
@@ -78,22 +81,22 @@ export default class playGame extends Phaser.Scene {
 		});
 		this.anims.create({
 			key: 'floatLeft',
-			frames: [{ key: 'characterSprites', frame: 0 }],
+			frames: [{ key: 'dude', frame: 0 }],
 			frameRate: 10,
 		});
 		this.anims.create({
 			key: 'floatRight',
-			frames: [{ key: 'characterSprites', frame: 11 }],
+			frames: [{ key: 'dude', frame: 11 }],
 			frameRate: 10,
 		});
 		this.anims.create({
 			key: 'stillRight',
-			frames: [{ key: 'characterSprites', frame: 6 }],
+			frames: [{ key: 'dude', frame: 6 }],
 			frameRate: 10,
 		});
 		this.anims.create({
 			key: 'stillLeft',
-			frames: [{ key: 'characterSprites', frame: 5 }],
+			frames: [{ key: 'dude', frame: 5 }],
 			frameRate: 10,
 		});
 		player.anims.play('stillRight', true);
@@ -106,19 +109,55 @@ export default class playGame extends Phaser.Scene {
 		flame.anims.play('flameOn', true);
 
 		this.anims.create({
-			key: 'enemyLeft',
-			frames: this.anims.generateFrameNumbers('characterSprites', {
-				start: 16,
-				end: 17,
+			key: 'chaserLeft',
+			frames: this.anims.generateFrameNumbers('chaser', {
+				start: 0,
+				end: 1,
 			}),
 			frameRate: 3,
 			repeat: -1,
 		});
 		this.anims.create({
-			key: 'enemyRight',
-			frames: this.anims.generateFrameNumbers('characterSprites', {
-				start: 18,
-				end: 19,
+			key: 'chaserRight',
+			frames: this.anims.generateFrameNumbers('chaser', {
+				start: 2,
+				end: 3,
+			}),
+			frameRate: 3,
+			repeat: -1,
+		});
+		this.anims.create({
+			key: 'ambusherLeft',
+			frames: this.anims.generateFrameNumbers('ambusher', {
+				start: 0,
+				end: 1,
+			}),
+			frameRate: 3,
+			repeat: -1,
+		});
+		this.anims.create({
+			key: 'ambusherRight',
+			frames: this.anims.generateFrameNumbers('ambusher', {
+				start: 2,
+				end: 3,
+			}),
+			frameRate: 3,
+			repeat: -1,
+		});
+		this.anims.create({
+			key: 'stalkerLeft',
+			frames: this.anims.generateFrameNumbers('stalker', {
+				start: 0,
+				end: 1,
+			}),
+			frameRate: 3,
+			repeat: -1,
+		});
+		this.anims.create({
+			key: 'stalkerRight',
+			frames: this.anims.generateFrameNumbers('stalker', {
+				start: 2,
+				end: 3,
 			}),
 			frameRate: 3,
 			repeat: -1,
@@ -127,9 +166,9 @@ export default class playGame extends Phaser.Scene {
 
 	update() {
 		flame.body.setAllowGravity(false);
-		flame.x = player.x + (player.faceDir === 'right' ? -2 : 2);
+		flame.x = player.x + (player.faceDir === 'right' ? -3 : 3);
 		flame.setVelocityX(player.body.velocity.x);
-		flame.y = player.y + 9;
+		flame.y = player.y + 14;
 		flame.setVelocityY(player.body.velocity.y);
 		if (!cursors.up.isDown) {
 			flame.setVisible(false);

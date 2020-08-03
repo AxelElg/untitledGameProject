@@ -1,6 +1,9 @@
 import Phaser from 'phaser';
-import caraSprits from '../../assets/caracterSprites.png';
-import flame3 from '../../assets/flame3.png';
+import dude from '../../assets/dude.png';
+import chaser from '../../assets/chaser.png';
+import ambusher from '../../assets/ambusher.png';
+import stalker from '../../assets/stalker.png';
+import flame from '../../assets/flame.png';
 import ground from '../../assets/ground.png';
 import ground21 from '../../assets/ground2-1.png';
 import ground22 from '../../assets/ground2-2.png';
@@ -27,17 +30,29 @@ export default class loadGame extends Phaser.Scene {
 		this.load.image('ground2-2', ground22);
 		this.load.image('ground2-3', ground23);
 		this.load.image('ground3', ground3);
-		this.load.spritesheet('characterSprites', caraSprits, {
-			frameWidth: 20,
-			frameHeight: 20,
-		});
 		this.load.image('platform', platform);
 		this.load.image('platform2-1', platform21);
 		this.load.image('platform2-2', platform22);
 		this.load.image('platform3', platform3);
-		this.load.spritesheet('jetFlame', flame3, {
-			frameWidth: 6,
-			frameHeight: 16,
+		this.load.spritesheet('dude', dude, {
+			frameWidth: 20,
+			frameHeight: 20,
+		});
+		this.load.spritesheet('jetFlame', flame, {
+			frameWidth: 8,
+			frameHeight: 24,
+		});
+		this.load.spritesheet('chaser', chaser, {
+			frameWidth: 20,
+			frameHeight: 20,
+		});
+		this.load.spritesheet('ambusher', ambusher, {
+			frameWidth: 20,
+			frameHeight: 20,
+		});
+		this.load.spritesheet('stalker', stalker, {
+			frameWidth: 20,
+			frameHeight: 20,
 		});
 	}
 	update() {

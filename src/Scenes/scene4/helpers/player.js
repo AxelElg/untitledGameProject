@@ -17,11 +17,11 @@ export default function handleInput(player, cursors) {
 			}
 		}
 	} else {
-		if (cursors.left.isDown && player.body.velocity.x > -100) {
+		if (cursors.left.isDown && player.body.velocity.x > -70) {
 			player.setVelocityX(player.body.velocity.x - 5);
 			player.faceDir = 'left';
 			player.anims.play('floatLeft', true);
-		} else if (cursors.right.isDown && player.body.velocity.x < 100) {
+		} else if (cursors.right.isDown && player.body.velocity.x < 70) {
 			player.setVelocityX(player.body.velocity.x + 5);
 			player.faceDir = 'right';
 			player.anims.play('floatRight', true);

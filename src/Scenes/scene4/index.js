@@ -2,7 +2,7 @@ import Phaser from 'phaser';
 import config from '../../config';
 import handleInput from './helpers/player.js';
 import enemyHandler from './helpers/enemyHandeler';
-import initialEnemyAdder from './helpers/enemyMaker';
+import { initialEnemyAdder } from './helpers/enemyMaker';
 import createStage from './helpers/createStage';
 
 let player;

@@ -42,16 +42,8 @@ export default class playGame extends Phaser.Scene {
 		player.faceDir = 'right';
 		enemy = this.add.group();
 
-		initialEnemyAdder(this.level, player, enemy, this);
-		// for (let i = 0; i < this.level; i++) {
-		// 	let newEnemy = this.physics.add.sprite(
-		// 		i % 2 ? 0 : 200,
-		// 		enemyStartPos(player.y),
-		// 		'chaser'
-		// 	);
-		// 	newEnemy.enemyType = 'chaser';
-		// 	enemy.add(newEnemy);
-		// }
+		initialEnemyAdder(this, player, enemy);
+
 		enemy.children.each(e => {
 			e.body.setAllowGravity(false);
 			e.body.setBounce(1);
@@ -162,6 +154,8 @@ export default class playGame extends Phaser.Scene {
 			frameRate: 3,
 			repeat: -1,
 		});
+		this.levelOngoing = true;
+		this.enemiesLeft = Number(this.level);
 	}
 
 	update() {
@@ -170,23 +164,24 @@ export default class playGame extends Phaser.Scene {
 		flame.setVelocityX(player.body.velocity.x);
 		flame.y = player.y + 14;
 		flame.setVelocityY(player.body.velocity.y);
+		handleInput(player, cursors);
 		if (!cursors.up.isDown) {
 			flame.setVisible(false);
 		} else {
 			flame.setVisible(true);
 		}
-		if (enemy.children.entries.length > 0) {
+
+		if (this.enemiesLeft > 0) {
 			enemy.children.each(e => {
 				enemyHandler(player, e);
 				if (this.physics.overlap(e, flame) && flame.visible) {
 					e.destroy();
+					this.enemiesLeft -= 1;
 				}
-
 				if (this.physics.overlap(e, player) && e.visible) {
 					this.scene.start('gameOver', { level: this.level });
 				}
 			});
-			handleInput(player, cursors);
 		} else {
 			this.scene.start('nextLevel', { level: this.level + 1 });
 		}

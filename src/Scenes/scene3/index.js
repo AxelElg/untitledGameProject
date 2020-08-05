@@ -1,6 +1,10 @@
 import Phaser from 'phaser';
 import config from '../../config';
 
+const nextScene = game => {
+	game.scene.start('playGame', { level: game.level });
+};
+
 export default class nextLevel extends Phaser.Scene {
 	constructor() {
 		super('nextLevel');
@@ -16,8 +20,12 @@ export default class nextLevel extends Phaser.Scene {
 			.setScale(0.75);
 	}
 	update() {
-		if (this.input.keyboard.createCursorKeys().up.isDown) {
-			this.scene.start('playGame', { level: this.level });
-		}
+		this.time.addEvent({
+			delay: 3000,
+			callback: nextScene,
+			args: [this],
+			callbackScope: this,
+			loop: false,
+		});
 	}
 }

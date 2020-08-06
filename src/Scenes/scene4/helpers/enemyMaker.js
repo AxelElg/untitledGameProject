@@ -23,7 +23,7 @@ const enemyStartPos = playerPos => {
 export const initialEnemyAdder = (game, player, enemy) => {
 	const { level } = game;
 	const secondWaveEnemyNr = level - Math.ceil(level / 3);
-	const enemyRange = level < 3 ? 0 : level < 12 ? 2 : 2;
+	const enemyRange = level < 3 ? 0 : level < 6 ? 2 : 3;
 	for (let i = 0; i < Math.ceil(level / 3); i++) {
 		const type = randomEnemyType(enemyRange);
 		const newEnemy = game.physics.add.sprite(

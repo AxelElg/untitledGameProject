@@ -42,7 +42,17 @@ export default class playGame extends Phaser.Scene {
 		player.faceDir = 'right';
 		enemy = this.add.group();
 
-		initialEnemyAdder(this, player, enemy);
+		// initialEnemyAdder(this, player, enemy);
+
+		const newEnemy = this.physics.add.sprite(
+			Math.floor(Math.random() * config.width),
+			enemyStartPos(player.y),
+			'stalker'
+		);
+
+		newEnemy.enemyType = 'stalker';
+
+		enemy.add(newEnemy);
 
 		enemy.children.each(e => {
 			e.body.setAllowGravity(false);

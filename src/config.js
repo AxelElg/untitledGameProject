@@ -9,6 +9,8 @@ export default {
 	type: Phaser.AUTO,
 	width: 200,
 	height: 360,
+	// width: window.innerWidth,
+	// height: window.innerHeight,
 	physics: {
 		default: 'arcade',
 		arcade: {
@@ -18,4 +20,8 @@ export default {
 	},
 	scene: [titleScene, loadGame, nextLevel, playGame, gameOver],
 	pixelArt: true,
+	// scale: {
+	// 	parent: 'game',
+	// 	autoCenter: Phaser.Scale.CENTER_BOTH,
+	// },
 };

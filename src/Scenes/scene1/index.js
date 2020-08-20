@@ -11,7 +11,10 @@ export default class titleScene extends Phaser.Scene {
 			.setScale(0.75);
 	}
 	update() {
-		if (this.input.keyboard.createCursorKeys().up.isDown) {
+		if (
+			this.input.keyboard.createCursorKeys().up.isDown ||
+			this.input.activePointer.isDown
+		) {
 			this.scene.start('loadGame');
 		}
 	}

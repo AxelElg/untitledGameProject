@@ -25,6 +25,11 @@ module.exports = {
 			},
 		],
 	},
+	// devServer: {
+	// 	contentBase: path.join(__dirname, 'dist'),
+	// 	compress: true,
+	// 	port: 9000,
+	// },
 	plugins: [
 		new CleanWebpackPlugin({
 			root: path.resolve(__dirname, '../'),

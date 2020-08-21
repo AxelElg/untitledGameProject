@@ -2,6 +2,7 @@ import Phaser from 'phaser';
 import config from '../../config';
 import handleInput from './helpers/player.js';
 import enemyHandler from './helpers/enemyHandeler';
+import spriteScaler from './helpers/spriteScaler';
 import enemyAdder from './helpers/enemyMaker';
 import createStage from './helpers/createStage';
 
@@ -24,10 +25,11 @@ export default class playGame extends Phaser.Scene {
 
 		this.player = this.physics.add.sprite(
 			config.width / 3,
-			config.height - 60,
+			config.height * (15.5 / 18),
 			'dude'
 		);
 		this.player.faceDir = 'right';
+		spriteScaler(this.player);
 
 		this.enemy = this.add.group();
 		enemyAdder(this);
@@ -42,11 +44,11 @@ export default class playGame extends Phaser.Scene {
 	}
 
 	update() {
-		handleInput(this.player, this.cursors, this.flame, this.mouse);
+		handleInput(this.player, this.cursors, this.flame, this.mouse, config);
 
 		if (this.enemiesLeft > 0) {
 			this.enemy.children.each(e => {
-				enemyHandler(this.player, e);
+				enemyHandler(this.player, e, config);
 				if (this.physics.overlap(e, this.flame) && this.flame.visible) {
 					e.destroy();
 					this.enemiesLeft -= 1;

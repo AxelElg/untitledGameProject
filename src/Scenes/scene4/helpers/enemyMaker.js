@@ -1,4 +1,5 @@
 import config from '../../../config';
+import spriteScaler from './spriteScaler';
 
 const randomEnemyType = nr => {
 	switch (Math.floor(Math.random() * nr)) {
@@ -36,6 +37,7 @@ export default function enemyAdder(game, firstWave = true) {
 			newEnemy.body.setBounce(1.5);
 			newEnemy.body.setSize(10, 10, true);
 			newEnemy.enemyType = type;
+			spriteScaler(newEnemy);
 			enemy.add(newEnemy);
 		}
 		if (secondWaveEnemyNr > 0) {
@@ -57,6 +59,7 @@ export default function enemyAdder(game, firstWave = true) {
 		newEnemy.body.setBounce(1.5);
 		newEnemy.body.setSize(10, 10, true);
 		newEnemy.enemyType = type;
+		spriteScaler(newEnemy);
 		enemy.add(newEnemy);
 	}
 }

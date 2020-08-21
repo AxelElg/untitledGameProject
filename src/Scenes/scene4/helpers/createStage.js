@@ -1,78 +1,98 @@
 import config from '../../../config';
+import spriteScaler from './spriteScaler';
 
 export default function createStage(platforms) {
-	function buildStage1() {
-		platforms.create(config.width / 2, config.height - 20, 'ground');
-		platforms.create(config.width / 4, (config.height - 20) / 2, 'platform');
-		platforms.create(
-			(config.width / 4) * 3,
-			(config.height - 20) / 4,
-			'platform'
-		);
-		platforms.create(
-			config.width / 2,
-			((config.height - 20) / 4) * 3,
-			'platform'
-		);
+	const tileUnit = config.height / 18;
+
+	const indexGenerator = () => {
+		const indexArr = [];
+		const newIndexNr = () => {
+			let indexNr = Math.floor(Math.random() * 10);
+			if (indexNr === 10) indexNr = 9;
+
+			if (indexNr === 9 || indexNr === 0) {
+				if (
+					indexNr === 9 &&
+					indexArr.length < 3 &&
+					indexArr.every(e => e !== 0 && e !== 2) &&
+					indexArr.every(e => e !== indexNr && Math.abs(e - indexNr) !== 2)
+				) {
+					indexArr.push(0);
+					indexArr.push(indexNr);
+				}
+				if (
+					indexNr === 0 &&
+					indexArr.length < 3 &&
+					indexArr.every(e => e !== 9 && Math.abs(e - 9) !== 2) &&
+					indexArr.every(e => e !== indexNr && Math.abs(e - indexNr) !== 2)
+				) {
+					indexArr.push(indexNr);
+					indexArr.push(9);
+				}
+			} else {
+				if (indexArr.every(e => e !== indexNr && Math.abs(e - indexNr) !== 2)) {
+					indexArr.push(indexNr);
+				}
+			}
+		};
+		while (indexArr.length < 4) {
+			newIndexNr();
+		}
+		return indexArr;
+	};
+
+	const platformLevel1 = indexGenerator();
+	const platformLevel2 = indexGenerator();
+	const platformLevel3 = indexGenerator();
+
+	// building base level
+	for (let i = 0; i < 10; i++) {
+		platforms
+			.create(
+				tileUnit * i + tileUnit / 2,
+				config.height - tileUnit * 1.5,
+				'platform3'
+			)
+			.setSize(tileUnit, tileUnit);
+		platforms
+			.create(
+				tileUnit * i + tileUnit / 2,
+				config.height - tileUnit * 0.5,
+				'platform3'
+			)
+			.setSize(tileUnit, tileUnit);
 	}
 
-	function buildStage2() {
-		platforms.create(config.width / 2, config.height - 20, 'ground2-1');
-		platforms.create(config.width / 2, config.height - 70, 'ground2-2');
-		platforms.create(config.width / 2, config.height - 130, 'ground2-3');
-		platforms.create(30, config.height / 3, 'platform2-1');
-		platforms.create(config.width - 30, config.height / 3, 'platform2-2');
+	//building top platform level
+	for (let i = 0; i < platformLevel1.length; i++) {
+		platforms
+			.create(
+				tileUnit * platformLevel1[i] + tileUnit / 2,
+				tileUnit * 4 + tileUnit / 2,
+				'platform3'
+			)
+			.setSize(tileUnit, tileUnit);
 	}
 
-	function buildStage3() {
-		platforms.create(config.width / 2, config.height - 20, 'ground3');
-		platforms.create(config.width / 5, (config.height - 20) / 5, 'platform3');
-		platforms.create(
-			(config.width / 5) * 3,
-			(config.height - 20) / 5,
-			'platform3'
-		);
-		platforms.create(
-			(config.width / 5) * 2,
-			((config.height - 20) / 5) * 2,
-			'platform3'
-		);
-		platforms.create(
-			(config.width / 5) * 4,
-			((config.height - 20) / 5) * 2,
-			'platform3'
-		);
-		platforms.create(
-			config.width / 5,
-			((config.height - 20) / 5) * 3,
-			'platform3'
-		);
-		platforms.create(
-			(config.width / 5) * 3,
-			((config.height - 20) / 5) * 3,
-			'platform3'
-		);
-		platforms.create(
-			(config.width / 5) * 2,
-			((config.height - 20) / 5) * 4,
-			'platform3'
-		);
-		platforms.create(
-			(config.width / 5) * 4,
-			((config.height - 20) / 5) * 4,
-			'platform3'
-		);
+	for (let i = 0; i < platformLevel2.length; i++) {
+		platforms
+			.create(
+				tileUnit * platformLevel2[i] + tileUnit / 2,
+				tileUnit * 8 + tileUnit / 2,
+				'platform3'
+			)
+			.setSize(tileUnit, tileUnit);
 	}
-	let rNJ = Math.floor(Math.random() * 3);
-	switch (rNJ) {
-		case 0:
-			buildStage1();
-			break;
-		case 1:
-			buildStage2();
-			break;
-		default:
-			buildStage3();
-			break;
+
+	for (let i = 0; i < platformLevel3.length; i++) {
+		platforms
+			.create(
+				tileUnit * platformLevel3[i] + tileUnit / 2,
+				tileUnit * 12 + tileUnit / 2,
+				'platform3'
+			)
+			.setSize(tileUnit, tileUnit);
 	}
+
+	platforms.children.each(e => spriteScaler(e));
 }

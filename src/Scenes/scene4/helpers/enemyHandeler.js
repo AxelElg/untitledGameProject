@@ -1,10 +1,11 @@
-export default function enemyHandler(player, enemy) {
-	const maxSpeed = 50;
-	const acceleration = 3;
+export default function enemyHandler(player, enemy, config) {
+	const unit = config.width / 10;
+	const maxSpeed = unit * 2.5;
+	const acceleration = 3 * (unit / 20);
 	const type = enemy.enemyType;
 
-	if (enemy.x > 209) enemy.x = -9;
-	if (enemy.x < -9) enemy.x = 209;
+	if (enemy.x < unit / -2) enemy.x = config.width + unit / 2;
+	if (enemy.x > config.width + unit / 2) enemy.x = unit / -2;
 	switch (type) {
 		case 'chaser':
 			if (player.y > enemy.y && enemy.body.velocity.y < maxSpeed) {

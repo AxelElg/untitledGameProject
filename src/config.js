@@ -7,21 +7,21 @@ import gameOver from './Scenes/scene5';
 
 export default {
 	type: Phaser.AUTO,
-	width: 200,
-	height: 360,
-	// width: window.innerWidth,
-	// height: window.innerHeight,
+	// width: 200,
+	// height: 360,
+	width: window.innerHeight * (5 / 9),
+	height: window.innerHeight,
 	physics: {
 		default: 'arcade',
 		arcade: {
-			gravity: { y: 300 },
+			gravity: { y: (window.innerHeight * 5) / 6 },
 			debug: false,
 		},
 	},
 	scene: [titleScene, loadGame, nextLevel, playGame, gameOver],
 	pixelArt: true,
-	// scale: {
-	// 	parent: 'game',
-	// 	autoCenter: Phaser.Scale.CENTER_BOTH,
-	// },
+	scale: {
+		parent: 'game',
+		autoCenter: Phaser.Scale.CENTER_BOTH,
+	},
 };

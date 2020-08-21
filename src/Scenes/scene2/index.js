@@ -4,6 +4,7 @@ import chaser from '../../assets/chaser.png';
 import ambusher from '../../assets/ambusher.png';
 import stalker from '../../assets/stalker.png';
 import flame from '../../assets/flame.png';
+import groundTiles from '../../assets/groundTiles.png';
 import ground from '../../assets/ground.png';
 import ground21 from '../../assets/ground2-1.png';
 import ground22 from '../../assets/ground2-2.png';
@@ -34,6 +35,10 @@ export default class loadGame extends Phaser.Scene {
 		this.load.image('platform2-1', platform21);
 		this.load.image('platform2-2', platform22);
 		this.load.image('platform3', platform3);
+		this.load.spritesheet('groundTiles', groundTiles, {
+			frameWidth: 20,
+			frameHeight: 20,
+		});
 		this.load.spritesheet('dude', dude, {
 			frameWidth: 20,
 			frameHeight: 20,

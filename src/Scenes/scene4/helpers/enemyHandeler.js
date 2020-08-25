@@ -30,7 +30,7 @@ export default function enemyHandler(player, enemy, config) {
 			}
 
 			if (player.x > enemy.x) {
-				if (player.x - enemy.x < 100) {
+				if (player.x - enemy.x < config.width / 2) {
 					enemy.anims.play(`${type}Right`, true);
 					if (enemy.body.velocity.x < maxSpeed) {
 						enemy.setVelocityX(enemy.body.velocity.x + acceleration);
@@ -42,7 +42,7 @@ export default function enemyHandler(player, enemy, config) {
 					}
 				}
 			} else {
-				if (enemy.x - player.x < 100) {
+				if (enemy.x - player.x < config.width / 2) {
 					enemy.anims.play(`${type}Left`, true);
 					if (enemy.body.velocity.x > -maxSpeed) {
 						enemy.setVelocityX(enemy.body.velocity.x - acceleration);

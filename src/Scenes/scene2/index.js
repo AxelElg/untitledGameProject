@@ -5,7 +5,6 @@ import ambusher from '../../assets/ambusher.png';
 import stalker from '../../assets/stalker.png';
 import flame from '../../assets/flame.png';
 import groundTiles from '../../assets/groundTiles.png';
-import platform3 from '../../assets/platform3.png';
 import config from '../../config';
 
 export default class loadGame extends Phaser.Scene {
@@ -18,7 +17,6 @@ export default class loadGame extends Phaser.Scene {
 			.setScale(0.75);
 	}
 	preload() {
-		this.load.image('platform3', platform3);
 		this.load.spritesheet('groundTiles', groundTiles, {
 			frameWidth: 20,
 			frameHeight: 20,

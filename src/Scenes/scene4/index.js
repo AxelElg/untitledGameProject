@@ -18,6 +18,8 @@ export default class playGame extends Phaser.Scene {
 	create() {
 		this.flame = this.physics.add.sprite(0, 0, 'jetFlame');
 		this.flame.body.setAllowGravity(false);
+		this.flame.displayWidth = config.width / 25;
+		this.flame.displayHeight = config.height * (5 / 72);
 		this.flame.anims.play('flameOn', true);
 
 		this.platforms = this.physics.add.staticGroup();

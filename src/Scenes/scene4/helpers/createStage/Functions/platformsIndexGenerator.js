@@ -7,16 +7,15 @@ export default function platformsIndexGenerator() {
 			indexNr === 0 || indexNr === 9,
 			indexArr.length <= 2,
 			!indexArr.includes(0 && 9),
-			indexArr.every(e => e !== 2 || e === 1),
-			indexArr.every(e => e !== 7 || e === 8),
+			!indexArr.includes(2) || indexArr.includes(1),
+			!indexArr.includes(7) || indexArr.includes(8),
 		];
 
 		const conditions1To8 = [
 			indexNr !== 0 && indexNr !== 9,
 			!indexArr.includes(indexNr),
-			indexArr.every(
-				e => Math.abs(e - indexNr) !== 2 || Math.abs(e - indexNr) === 1
-			),
+			!indexArr.includes(indexNr - 2) || indexArr.includes(indexNr - 1),
+			!indexArr.includes(indexNr + 2) || indexArr.includes(indexNr + 1),
 		];
 
 		if (conditions0Or9.every(e => e)) {

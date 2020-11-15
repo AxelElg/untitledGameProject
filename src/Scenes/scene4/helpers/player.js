@@ -50,7 +50,7 @@ export default function handleInput(player, cursors, flame, mouse, config) {
 		? player.anims.play('stillRight', true)
 		: player.anims.play('stillLeft', true);
 
-	flame.y = player.y + 14;
+	flame.y = player.y + (14 * unit) / 20;
 	flame.x = player.x + (player.faceDir === 'right' ? -3 : 3);
 	flame.body.velocity.y = player.body.velocity.y;
 	flame.body.velocity.x = player.body.velocity.x;
